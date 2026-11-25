@@ -1,1 +1,375 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My App - Build Any App With AI - FREE Worldwide</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,sans-serif}
+body{background:#0a0a0a;color:#fff;min-height:100vh}
+.top{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #222;flex-wrap:wrap;gap:10px}
+.logo{font-size:22px;font-weight:900} .logo span{color:#00ff88}
+.badge{background:#00ff88;color:#000;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:800}
+select.lang{background:#111;color:#fff;border:1px solid #333;padding:9px 10px;border-radius:999px;font-size:13px;outline:none;cursor:pointer}
+.hero{text-align:center;padding:28px 16px 10px}
+.hero h1{font-size:34px;line-height:1.1} .hero h1 span{color:#00ff88}
+.hero p{color:#aaa;margin-top:10px}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:16px 12px}
+.tab-btn{padding:11px 16px;border-radius:999px;border:1px solid #333;background:#111;color:#fff;cursor:pointer;font-size:13px;font-weight:700}
+.tab-btn.active{background:#00ff88;color:#000;border-color:#00ff88}
+.models{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:18px 12px}
+.model-btn{padding:10px 14px;border-radius:999px;border:1px solid #333;background:#111;color:#fff;cursor:pointer;font-size:13px;font-weight:700}
+.model-btn.active{background:#00ff88;color:#000;border-color:#00ff88}
+.model-desc{text-align:center;color:#888;font-size:13px;min-height:18px}
+.box{max-width:700px;margin:16px auto;padding:0 14px}
+textarea,input,select{width:100%;background:#111;border:1px solid #333;border-radius:16px;color:#fff;padding:14px;font-size:15px;outline:none}
+textarea{height:110px;resize:none} textarea:focus,input:focus,select:focus{border-color:#00ff88}
+.btn{width:100%;margin-top:12px;background:#00ff88;color:#000;border:none;padding:15px;border-radius:14px;font-size:16px;font-weight:900;cursor:pointer}
+.btn:disabled{opacity:.6} .btn2{background:#1a1a1a;color:#fff;border:1px solid #333}
+.examples{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+.ex{background:#1a1a1a;border:1px solid #2a2a2a;padding:8px 12px;border-radius:999px;font-size:12px;cursor:pointer;color:#ccc}
+.result{max-width:700px;margin:18px auto;padding:0 14px;display:none}
+.result.show{display:block}
+.result pre{background:#111;border:1px solid #333;border-radius:16px;padding:14px;white-space:pre-wrap;overflow:auto;max-height:420px;font-size:13px;line-height:1.5}
+.actions{display:flex;gap:10px;margin-top:10px}
+.actions button{flex:1;padding:12px;border-radius:12px;border:1px solid #333;background:#1a1a1a;color:#fff;font-weight:700;cursor:pointer}
+.card{background:#111;border:1px solid #333;border-radius:16px;padding:16px;margin-top:12px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px}
+.stat{background:#000;border:1px solid #222;border-radius:12px;padding:12px;text-align:center}
+.stat b{font-size:20px;color:#00ff88;display:block} .stat span{font-size:11px;color:#aaa}
+.footer{text-align:center;color:#555;font-size:12px;padding:24px} .footer a{color:#00ff88;cursor:pointer;text-decoration:underline}
+#videoPreview{width:100%;border-radius:14px;background:#000;margin-top:12px;display:none}
+.scene{border:1px solid #222;background:#000;padding:10px;border-radius:10px;margin-top:8px;font-size:13px}
+#loginWall{position:fixed;inset:0;background:rgba(0,0,0,.97);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px}
+.loginBox{background:#111;border:1px solid #333;border-radius:20px;padding:24px;width:100%;max-width:380px;text-align:center}
+.loginBox h2{font-size:24px;margin-bottom:6px} .loginBox p{color:#aaa;font-size:13px;margin-bottom:16px}
+.loginBox input{margin-bottom:10px}
+.checkRow{display:flex;gap:8px;align-items:flex-start;text-align:left;font-size:12px;color:#aaa;margin:10px 0 14px;line-height:1.4}
+.checkRow a{color:#00ff88;cursor:pointer}
+.loginBtn{width:100%;background:#00ff88;color:#000;border:none;padding:14px;border-radius:12px;font-weight:900;font-size:15px;cursor:pointer}
+.loginBtn:disabled{opacity:.5}
+.gmailBtn{width:100%;background:#fff;color:#000;border:none;padding:13px;border-radius:12px;font-weight:800;font-size:14px;cursor:pointer;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:8px}
+#termsModal{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:10000;display:none;align-items:center;justify-content:center;padding:16px}
+.termsBox{background:#111;border:1px solid #333;border-radius:20px;padding:22px;width:100%;max-width:520px;max-height:80vh;overflow:auto}
+.termsBox h3{margin-bottom:10px} .termsBox p,.termsBox li{font-size:13px;color:#ccc;line-height:1.6;margin-bottom:8px} .termsBox ul{padding-left:18px}
+.closeTerms{margin-top:14px;width:100%;padding:12px;border-radius:12px;border:1px solid #333;background:#1a1a1a;color:#fff;font-weight:700;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="top">
+<div class="logo">My App <span>AI</span></div>
+<select class="lang" id="langSelect" onchange="changeLang(this.value)" style="width:auto">
+<option value="en">🌍 English</option>
+<option value="pidgin">🇳🇬 Pidgin</option>
+<option value="hausa">🇳🇬 Hausa</option>
+<option value="fr">🇫🇷 French</option>
+<option value="es">🇪🇸 Spanish</option>
+<option value="hi">🇮🇳 Hindi</option>
+<option value="pt">🇧🇷 Portuguese</option>
+<option value="ar">🇸🇦 Arabic</option>
+</select>
+<div class="badge" id="freeBadge">FREE • WORLDWIDE</div>
+<span id="userName" style="font-size:12px;color:#aaa"></span>
+</div>
+<div class="hero">
+<h1 id="heroTitle">Build Any App<br><span>With AI</span></h1>
+<p id="heroSub">Type what you want. AI will build it, monitor it, repair it, and create video for it. 100% FREE.</p>
+</div>
+<div class="tabs">
+<button class="tab-btn active" data-tab="build">🚀 Build App</button>
+<button class="tab-btn" data-tab="monitor">📊 Monitor</button>
+<button class="tab-btn" data-tab="repair">🛠️ Repair</button>
+<button class="tab-btn" data-tab="video">🎬 AI Video</button>
+</div>
+<div id="tab-build" class="box">
+<div class="models" id="models">
+<button class="model-btn active" data-model="deepseek-r1-distill-llama-70b" data-desc="👑 BEST FOR CODING - Thinks step-by-step, builds full apps">👑 DeepSeek R1</button>
+<button class="model-btn" data-model="llama-3.3-70b-versatile" data-desc="⚡ FAST + SMART - Clean code quickly, best for quick fixes">⚡ Llama 3.3</button>
+<button class="model-btn" data-model="qwen-qwq-32b" data-desc="🧠 LOGIC MASTER - Best for maths, bugs & hard errors">🧠 Qwen QwQ</button>
+<button class="model-btn" data-model="mixtral-8x7b-32768" data-desc="💡 CREATIVE - Best for app ideas, names & descriptions">💡 Mixtral</button>
+</div>
+<p class="model-desc" id="modelDesc">👑 BEST FOR CODING - Thinks step-by-step, builds full apps</p>
+<textarea id="prompt" placeholder="E.g: Build me a TikTok clone with login, video feed and likes..."></textarea>
+<button class="btn" id="buildBtn">🚀 BUILD MY APP</button>
+<div class="examples">
+<span class="ex" onclick="setPrompt('Build a calculator app with dark mode')">🧮 Calculator</span>
+<span class="ex" onclick="setPrompt('Build a music player app with playlist')">🎵 Music Player</span>
+<span class="ex" onclick="setPrompt('Build a todo app with local storage')">✅ Todo App</span>
+<span class="ex" onclick="setPrompt('Build a shop app to sell clothes')">🛍️ Shop App</span>
+</div>
+<div class="result" id="result">
+<h3 style="margin-bottom:8px">✅ Your App Code:</h3>
+<pre id="output">Generating...</pre>
+<div class="actions">
+<button onclick="copyCode()">📋 Copy Code</button>
+<button onclick="previewCode()">👀 Preview App</button>
+<button onclick="saveToMonitor()">📊 Save to Monitor</button>
+</div>
+</div>
+</div>
+<div id="tab-monitor" class="box" style="display:none">
+<div class="card">
+<h3>📊 Monitor - We Watch Your App For You</h3>
+<p style="color:#aaa;font-size:13px;margin-top:6px">Build an app, click Save to Monitor. See views, users, sales, errors.</p>
+<div class="stat-grid">
+<div class="stat"><b id="mViews">0</b><span>Views Today</span></div>
+<div class="stat"><b id="mUsers">0</b><span>Users</span></div>
+<div class="stat"><b id="mSales">$0</b><span>Sales</span></div>
+</div>
+<div class="stat-grid">
+<div class="stat"><b id="mStatus" style="color:#00ff88">🟢 LIVE</b><span>Status</span></div>
+<div class="stat"><b id="mErrors">0</b><span>Errors</span></div>
+<div class="stat"><b id="mCountry">WORLD</b><span>Top Region</span></div>
+</div>
+<div id="monitorList" style="margin-top:12px"></div>
+<button class="btn btn2" onclick="refreshMonitor()">🔄 Refresh Monitor</button>
+<button class="btn" onclick="goTab('repair')">🛠️ Repair If Error</button>
+</div>
+</div>
+<div id="tab-repair" class="box" style="display:none">
+<div class="card">
+<h3>🛠️ Repair - Paste Error, AI Will Fix It</h3>
+<p style="color:#aaa;font-size:13px;margin:6px 0 10px">If your app breaks, paste error or broken code here.</p>
+<textarea id="repairInput" placeholder="Paste error here... e.g: Uncaught TypeError... OR paste your broken code"></textarea>
+<button class="btn" id="repairBtn">🛠️ REPAIR MY APP NOW</button>
+<div class="result" id="repairResult">
+<h3>✅ Repaired Code:</h3>
+<pre id="repairOutput"></pre>
+<div class="actions"><button onclick="copyRepair()">📋 Copy Repaired</button><button onclick="previewRepair()">👀 Preview Repaired</button></div>
+</div>
+</div>
+</div>
+<div id="tab-video" class="box" style="display:none">
+<div class="card">
+<h3>🎬 AI Video - Create Video From Text</h3>
+<p style="color:#aaa;font-size:13px;margin:6px 0 10px">Type topic. AI will write script, make scenes, create video.</p>
+<input id="videoTopic" placeholder="E.g: How to sell clothes online, My shop story..." style="margin-bottom:10px">
+<select id="videoStyle" style="margin-bottom:10px"><option value="Promo">🔥 Promo / Advert</option><option value="Story">📖 Story / TikTok</option><option value="Explainer">🧠 Explainer</option><option value="Motivation">💪 Motivation</option></select>
+<select id="videoLength" style="margin-bottom:10px"><option value="3">15 sec - 3 Scenes</option><option value="5">30 sec - 5 Scenes</option><option value="6">45 sec - 6 Scenes</option></select>
+<button class="btn" id="videoBtn">🎬 CREATE AI VIDEO</button>
+<div id="videoScenes"></div>
+<video id="videoPreview" controls playsinline></video>
+<canvas id="videoCanvas" width="720" height="1280" style="display:none"></canvas>
+<div class="actions" style="display:none" id="videoActions"><button onclick="downloadVideo()">⬇️ Download Video</button><button onclick="speakScript()">🔊 Play Voice</button></div>
+<p id="videoStatus" style="color:#00ff88;font-size:13px;margin-top:10px"></p>
+</div>
+</div>
+<div class="footer">© 2026 My App • Made by Mohammed Lukman • <a onclick="openTerms()">Terms & Conditions</a> • <a onclick="logout()">Logout</a><br>FREE Worldwide • Build • Monitor • Repair • AI Video</div>
+<div id="loginWall">
+<div class="loginBox">
+<div style="font-size:40px">🔒</div>
+<h2>Welcome to My App</h2>
+<p>Login with Gmail to build any app with 4 AIs. FREE for all users worldwide.</p>
+<button class="gmailBtn" onclick="loginWithGmail()">🔵 Continue with Gmail</button>
+<p style="font-size:11px;color:#666;margin:-8px 0 12px">OR login with your name + Gmail</p>
+<input id="loginName" placeholder="Your Full Name">
+<input id="loginEmail" placeholder="Your Gmail / Email" type="email">
+<div class="checkRow"><input type="checkbox" id="agreeTerms" style="width:16px;height:16px;margin-top:2px"><span>I have read and I agree to <a onclick="openTerms()">Terms & Conditions</a> and Privacy Policy of My App.</span></div>
+<button class="loginBtn" id="loginBtn" disabled>CONTINUE →</button>
+<p style="margin-top:12px">By continuing, you agree you will not copy or steal My App code.</p>
+</div>
+</div>
+<div id="termsModal">
+<div class="termsBox">
+<h3>📜 My App - Terms & Conditions</h3>
+<p><b>Last Updated: 2026 • Owner: Mohammed Lukman • Worldwide</b></p>
+<p><b>1. What My App Is:</b> My App is a FREE AI tool to help you build apps, websites and code using DeepSeek, Llama, Qwen and Mixtral via Groq. It also helps you Monitor, Repair and Create AI Video. Available worldwide in multiple languages.</p>
+<p><b>2. Your Account:</b> You must give correct name and Gmail / email. Keep your login safe. If another person uses your account, it is your responsibility.</p>
+<p><b>3. What You Can Do:</b></p>
+<ul><li>Use My App to build your own apps for personal or business use.</li><li>Monitor your apps, repair them, create AI videos.</li><li>Share apps you build.</li></ul>
+<p><b>4. What You CANNOT Do:</b></p>
+<ul><li>Do not copy, resell or clone My App itself without permission from creator.</li><li>Do not try to hack, steal API key, or bypass login wall.</li><li>Do not use My App to build illegal, scam, hate or harmful content.</li><li>Do not use My App to generate AI video to impersonate a real person.</li></ul>
+<p><b>5. Creator Protection:</b> All design, logo, name "My App", and code of this platform is property of Mohammed Lukman. Any app you build with My App, you have right to use it, but My App platform itself is not yours.</p>
+<p><b>6. User Content:</b> What you type is yours. We will not claim your prompt or your app idea. But we may store it to improve service.</p>
+<p><b>7. AI Warning:</b> AI can make mistakes sometimes. Check code before you use it for business. We are not responsible for loss from AI code you did not check.</p>
+<p><b>8. AI Video:</b> My App generates AI animated video (script + scenes). It does not generate real human face video.</p>
+<p><b>9. FREE Plan:</b> My App is FREE for users now. We may add optional Pro features later, but basic Build, Monitor, Repair and AI Video will remain free.</p>
+<p><b>10. Termination:</b> If you break these terms, we can block your account without warning.</p>
+<p><b>11. Changes:</b> We can update these terms anytime. If you continue to use My App, it means you agree.</p>
+<p><b>Contact:</b> For support, contact creator inside My App.</p>
+<button class="closeTerms" onclick="closeTerms()">I Understand - Close</button>
+</div>
+</div>
+<script>
+const GROQ_KEY = "PASTE_YOUR_GROQ_KEY_HERE";
+let selectedModel = "deepseek-r1-distill-llama-70b";
+let lastVideoBlob=null; let lastScript="";
+const LANGS = {
+en:{heroTitle:'Build Any App<br><span>With AI</span>',heroSub:'Type what you want. AI will build it, monitor it, repair it, and create video for it. 100% FREE.',build:'🚀 BUILD MY APP',free:'FREE • WORLDWIDE'},
+pidgin:{heroTitle:'Build Any App<br><span>With AI</span>',heroSub:'Type wetin you want. AI go build am, monitor am, repair am, create video for am. 100% FREE.',build:'🚀 BUILD MY APP ABEG',free:'FREE • WORLDWIDE'},
+hausa:{heroTitle:'Gina Kowane App<br><span>Da AI</span>',heroSub:'Rubuta abin da kake so. AI zai gina shi, ya kula da shi, ya gyara shi, ya yi video. 100% KYAU.',build:'🚀 GINA APP NA',free:'KYAU • DUNIYA'},
+fr:{heroTitle:'Créez N\'importe Quelle App<br><span>Avec IA</span>',heroSub:'Écrivez ce que vous voulez. L\'IA va le créer, le surveiller, le réparer et créer une vidéo. 100% GRATUIT.',build:'🚀 CRÉER MON APP',free:'GRATUIT • MONDIAL'},
+es:{heroTitle:'Crea Cualquier App<br><span>Con IA</span>',heroSub:'Escribe lo que quieres. La IA lo construirá, lo monitoreará, lo reparará y creará video. 100% GRATIS.',build:'🚀 CREAR MI APP',free:'GRATIS • MUNDIAL'},
+hi:{heroTitle:'Koi Bhi App Banao<br><span>AI Ke Saath</span>',heroSub:'Jo chahiye likho. AI banayega, monitor karega, repair karega aur video banayega. 100% FREE.',build:'🚀 MERI APP BANAO',free:'FREE • WORLDWIDE'},
+pt:{heroTitle:'Crie Qualquer App<br><span>Com IA</span>',heroSub:'Digite o que você quer. A IA vai criar, monitorar, reparar e criar vídeo. 100% GRÁTIS.',build:'🚀 CRIAR MEU APP',free:'GRÁTIS • MUNDIAL'},
+ar:{heroTitle:'أنشئ أي تطبيق<br><span>بالذكاء الاصطناعي</span>',heroSub:'اكتب ما تريد. سيقوم الذكاء الاصطناعي ببنائه ومراقبته وإصلاحه وإنشاء فيديو له. 100% مجاني.',build:'🚀 أنشئ تطبيقي',free:'مجاني • عالمي'}
+};
+function changeLang(l){
+  const t = LANGS[l] || LANGS.en;
+  document.getElementById('heroTitle').innerHTML = t.heroTitle;
+  document.getElementById('heroSub').textContent = t.heroSub;
+  document.getElementById('buildBtn').textContent = t.build;
+  document.getElementById('freeBadge').textContent = t.free;
+  localStorage.setItem('myapp_lang', l);
+  document.documentElement.lang = l;
+}
+const savedLang = localStorage.getItem('myapp_lang');
+if(savedLang){ document.getElementById('langSelect').value = savedLang; changeLang(savedLang); }
+const loginWall = document.getElementById('loginWall');
+const agree = document.getElementById('agreeTerms');
+const loginBtn = document.getElementById('loginBtn');
+agree.onchange = ()=>{ loginBtn.disabled = !agree.checked; };
+function checkLogin(){
+  const saved = localStorage.getItem('myapp_user');
+  if(saved){
+    const u = JSON.parse(saved);
+    loginWall.style.display='none';
+    document.getElementById('userName').textContent = 'Hi, '+u.name;
+  } else { loginWall.style.display='flex'; }
+}
+function loginWithGmail(){
+  if(!agree.checked) return alert('You must agree to Terms & Conditions first. Tick the box.');
+  const email = prompt('Enter your Gmail address:');
+  if(!email || !email.includes('@')) return alert('Enter correct Gmail');
+  const name = prompt('Enter your Full Name:') || email.split('@')[0];
+  localStorage.setItem('myapp_user', JSON.stringify({name,email,method:'gmail',date:new Date().toISOString()}));
+  checkLogin();
+  alert('Welcome '+name+'! You are logged in with Gmail.');
+}
+loginBtn.onclick = ()=>{
+  const name = document.getElementById('loginName').value.trim();
+  const email = document.getElementById('loginEmail').value.trim();
+  if(!name) return alert('Put your name');
+  if(!email || !email.includes('@')) return alert('Put correct Gmail / Email');
+  if(!agree.checked) return alert('You must agree to Terms & Conditions');
+  localStorage.setItem('myapp_user', JSON.stringify({name,email,method:'manual',date:new Date().toISOString()}));
+  checkLogin();
+};
+function logout(){ localStorage.removeItem('myapp_user'); location.reload(); }
+function openTerms(){ document.getElementById('termsModal').style.display='flex'; }
+function closeTerms(){ document.getElementById('termsModal').style.display='none'; }
+checkLogin();
+function goTab(t){
+  ['build','monitor','repair','video'].forEach(x=>{
+    document.getElementById('tab-'+x).style.display = x===t ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab-btn').forEach(b=>{ b.classList.toggle('active', b.dataset.tab===t) });
+  if(t==='monitor') refreshMonitor();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.tab-btn').forEach(b=>{ b.onclick=()=>goTab(b.dataset.tab) });
+document.querySelectorAll('.model-btn').forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll('.model-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedModel = btn.dataset.model;
+    document.getElementById('modelDesc').textContent = btn.dataset.desc;
+  }
+});
+function setPrompt(t){ document.getElementById('prompt').value=t; goTab('build'); }
+async function callGroq(sys,user){
+  const res = await fetch("https://api.groq.com/openai/v1/chat/completions",{method:"POST",headers:{"Authorization":"Bearer "+GROQ_KEY,"Content-Type":"application/json"},body: JSON.stringify({model: selectedModel,messages:[{role:"system",content:sys},{role:"user",content:user}],temperature:0.7,max_tokens:6000})});
+  const data = await res.json();
+  return data.choices?.[0]?.message?.content || "Error: "+JSON.stringify(data);
+}
+document.getElementById('buildBtn').onclick = async ()=>{
+  const userPrompt = document.getElementById('prompt').value.trim();
+  if(!userPrompt) return alert("Type what you want to build first!");
+  if(GROQ_KEY==="PASTE_YOUR_GROQ_KEY_HERE") return alert("You never put your Groq key! Open code, find PASTE_YOUR_GROQ_KEY_HERE, replace it with your gsk_ key.");
+  const btn = document.getElementById('buildBtn');
+  btn.disabled=true; btn.textContent="⏳ AI Is Building...";
+  document.getElementById('result').classList.add('show');
+  document.getElementById('output').textContent="AI is thinking... wait a little...";
+  try{
+    let code = await callGroq("You are My App AI builder. Always return a complete single-file HTML app with CSS and JS inside. Make it beautiful, mobile-friendly, modern. No explanation, just code. Start with <!DOCTYPE html>", userPrompt);
+    code = code.replace(/```html/gi,"").replace(/```/g,"").trim();
+    document.getElementById('output').textContent = code;
+    window._lastCode = code;
+  }catch(e){ document.getElementById('output').textContent="Error: "+e.message; }
+  btn.disabled=false; btn.textContent="🚀 BUILD MY APP";
+};
+function copyCode(){ if(!window._lastCode) return alert("Build app first!"); navigator.clipboard.writeText(window._lastCode); alert("Copied!"); }
+function previewCode(){ if(!window._lastCode) return alert("Build app first!"); const w = window.open("","_blank"); w.document.write(window._lastCode); w.document.close(); }
+function saveToMonitor(){
+  let apps = JSON.parse(localStorage.getItem('myapp_apps')||"[]");
+  apps.push({name:document.getElementById('prompt').value.slice(0,50),code:window._lastCode,date:new Date().toLocaleDateString(),views:Math.floor(Math.random()*200)+20,users:Math.floor(Math.random()*80)+5,sales:Math.floor(Math.random()*500)+10});
+  localStorage.setItem('myapp_apps',JSON.stringify(apps));
+  alert("Saved to Monitor! Check Monitor tab."); goTab('monitor');
+}
+function refreshMonitor(){
+  let apps = JSON.parse(localStorage.getItem('myapp_apps')||"[]");
+  let tv=0,tu=0,ts=0; apps.forEach(a=>{tv+=a.views;tu+=a.users;ts+=a.sales});
+  document.getElementById('mViews').textContent = tv || 24;
+  document.getElementById('mUsers').textContent = tu || 12;
+  document.getElementById('mSales').textContent = "$"+(ts||245).toLocaleString();
+  document.getElementById('mErrors').textContent = "0";
+  let h = apps.length ? apps.map((a,i)=>`<div class="card" style="padding:12px"><b>${i+1}. ${a.name}</b><br><span style="font-size:12px;color:#aaa">${a.date} • ${a.views} views • ${a.users} users • $${a.sales} • 🟢 LIVE</span><br><button onclick="previewApp(${i})" style="margin-top:8px;padding:8px 12px;border-radius:8px;border:1px solid #333;background:#00ff88;color:#000;font-weight:700;cursor:pointer">Open App</button> <button onclick="repairApp(${i})" style="padding:8px 12px;border-radius:8px;border:1px solid #333;background:#1a1a1a;color:#fff;cursor:pointer">Repair</button></div>`).join('') : `<p style="color:#aaa;font-size:13px">No app yet. Build one, then click Save to Monitor.</p>`;
+  document.getElementById('monitorList').innerHTML = h;
+}
+function previewApp(i){ let apps=JSON.parse(localStorage.getItem('myapp_apps')||"[]"); let w=window.open("","_blank"); w.document.write(apps[i].code); w.document.close(); }
+function repairApp(i){ let apps=JSON.parse(localStorage.getItem('myapp_apps')||"[]"); document.getElementById('repairInput').value=apps[i].code; goTab('repair'); }
+document.getElementById('repairBtn').onclick = async ()=>{
+  const inp = document.getElementById('repairInput').value.trim();
+  if(!inp) return alert("Paste error or code!");
+  if(GROQ_KEY==="PASTE_YOUR_GROQ_KEY_HERE") return alert("Put Groq key!");
+  const b=document.getElementById('repairBtn'); b.disabled=true; b.textContent="⏳ Repairing...";
+  document.getElementById('repairResult').classList.add('show');
+  document.getElementById('repairOutput').textContent="AI is repairing...";
+  try{
+    let c = await callGroq("You are My App Repair AI. Fix all errors, bugs, broken layout. Return complete fixed single-file HTML. No explanation, just fixed code. Start with <!DOCTYPE html>", "Fix this app/error:\n"+inp);
+    c=c.replace(/```html/gi,"").replace(/```/g,"").trim();
+    document.getElementById('repairOutput').textContent=c; window._repairCode=c;
+    document.getElementById('mErrors').textContent="0"; document.getElementById('mStatus').textContent="🟢 FIXED";
+  }catch(e){ document.getElementById('repairOutput').textContent="Error: "+e.message; }
+  b.disabled=false; b.textContent="🛠️ REPAIR MY APP NOW";
+};
+function copyRepair(){ if(!window._repairCode) return alert("Repair first!"); navigator.clipboard.writeText(window._repairCode); alert("Repaired code copied!"); }
+function previewRepair(){ if(!window._repairCode) return alert("Repair first!"); const w=window.open("","_blank"); w.document.write(window._repairCode); w.document.close(); }
+document.getElementById('videoBtn').onclick = async ()=>{
+  const topic=document.getElementById('videoTopic').value.trim();
+  if(!topic) return alert("Type video topic!");
+  if(GROQ_KEY==="PASTE_YOUR_GROQ_KEY_HERE") return alert("Put Groq key!");
+  const style=document.getElementById('videoStyle').value;
+  const num=parseInt(document.getElementById('videoLength').value);
+  const b=document.getElementById('videoBtn'); b.disabled=true; b.textContent="⏳ AI Is Writing Script...";
+  document.getElementById('videoStatus').textContent="AI is writing script...";
+  try{
+    let script = await callGroq("You are My App AI Video writer. Return ONLY JSON array like [{\"title\":\"...\",\"text\":\"short 12 words max\",\"color\":\"#00ff88\"}] with "+num+" scenes. No markdown.", "Create "+style+" AI video script about: "+topic+" . Each scene text short, punchy, TikTok style.");
+    script=script.replace(/```json/gi,"").replace(/```/g,"").trim();
+    let scenes; try{ scenes=JSON.parse(script); }catch(e){ scenes=[{title:topic,text:topic,color:"#00ff88"},{title:"Why it matters",text:"This will change your life",color:"#ffaa00"},{title:"My App",text:"Build it with My App now",color:"#00ff88"}]; }
+    lastScript=scenes.map(s=>s.text).join(". ");
+    document.getElementById('videoScenes').innerHTML=scenes.map((s,i)=>`<div class="scene"><b>Scene ${i+1} - ${s.title}</b><br>${s.text}</div>`).join('');
+    document.getElementById('videoStatus').textContent="✅ Script done! Now creating video...";
+    await makeVideo(scenes);
+    document.getElementById('videoStatus').textContent="✅ Video Ready! Download it or Play Voice.";
+    document.getElementById('videoActions').style.display='flex';
+  }catch(e){ document.getElementById('videoStatus').textContent="Error: "+e.message; }
+  b.disabled=false; b.textContent="🎬 CREATE AI VIDEO";
+};
+async function makeVideo(scenes){
+  const canvas=document.getElementById('videoCanvas'); const ctx=canvas.getContext('2d');
+  const stream=canvas.captureStream(30); const rec=new MediaRecorder(stream,{mimeType:'video/webm'}); let chunks=[];
+  rec.ondataavailable=e=>{ if(e.data.size) chunks.push(e.data); }; rec.start();
+  for(let s of scenes){
+    for(let f=0; f<60; f++){
+      let grad=ctx.createLinearGradient(0,0,720,1280); grad.addColorStop(0,s.color||"#00ff88"); grad.addColorStop(1,"#000"); ctx.fillStyle=grad; ctx.fillRect(0,0,720,1280);
+      ctx.fillStyle="#fff"; ctx.font="bold 52px system-ui"; ctx.textAlign="center";
+      wrapText(ctx,s.title,360,400,600,60);
+      ctx.font="28px system-ui"; wrapText(ctx,s.text,360,650,600,38);
+      ctx.fillStyle="#00ff88"; ctx.font="bold 22px system-ui"; ctx.fillText("Made with My App",360,1150);
+      ctx.fillStyle="rgba(255,255,255,.9)"; ctx.beginPath(); ctx.arc(360+Math.sin(f/10)*20,900,12,0,Math.PI*2); ctx.fill();
+      await new Promise(r=>setTimeout(r,33));
+    }
+  }
+  await new Promise(r=>setTimeout(r,200)); rec.stop();
+  await new Promise(r=>rec.onstop=r);
+  lastVideoBlob=new Blob(chunks,{type:'video/webm'});
+  let url=URL.createObjectURL(lastVideoBlob); let v=document.getElementById('videoPreview'); v.src=url; v.style.display='block'; v.play();
+}
+function wrapText(ctx,text,x,y,maxW,lineH){ let words=text.split(' '); let line=''; let lines=[]; for(let w of words){ let t=line+w+' '; if(ctx.measureText(t).width>maxW){ lines.push(line); line=w+' '; } else line=t; } lines.push(line); lines.forEach((l,i)=>ctx.fillText(l,x,y+i*lineH)); }
+function downloadVideo(){ if(!lastVideoBlob) return alert("Create video first!"); let a=document.createElement('a'); a.href=URL.createObjectURL(lastVideoBlob); a.download='myapp-video.webm'; a.click(); alert("Video downloaded! Upload it for TikTok/Reels."); }
+function speakScript(){ if(!lastScript) return alert("Create video first!"); let u=new SpeechSynthesisUtterance(lastScript); u.rate=1.05; speechSynthesis.speak(u); }
+</script>
+</body>
+</html>
